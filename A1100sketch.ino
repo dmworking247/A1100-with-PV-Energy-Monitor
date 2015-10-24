@@ -1,9 +1,21 @@
-/*
-  Source notes:
+/* 
+Purpose of sketch
+This version will read meter totals and energy direction from the Elster A1100 meter IR port, 
+and calculate instantaneous power from the pulsing LED, separating the pulses into distinct 'import' 
+and 'export' LEDs which you can then attach a simple monitor like the Watts Clever EW4500. 
+
+The code incorporates a RTC and pushes a 'log file' to the Serial port. 
+
+Later code revisions will publish this over RF to other devices, and/or upload via Ethernet. 
+*/
+
+
+/* 
+Source notes:
   
   Many thanks to Pedro (https://pedrosnotes.wordpress.com/2015/09/26/decoding-electricity-meter-elster-a1100-first-steps/) 
   for his adaptation of a sketch for decoding the IR sensor on an Elter A1100 meter, which was in turn originally based on
-  Dave's code for an Elter A100C meter:    http://www.rotwang.co.uk/projects/meter.html
+  Dave's code for an Elter A100C meter:    http://www.rotwang.co.uk/projects/meter.html 
 */
 
 /* 
@@ -11,7 +23,7 @@ Hardware information for my project:
 1x Arduino UNO
 1x RPM7138-R from Jaycar (Australia), catalog number ZD1952. Signal to pin 2, VCC to 5v.  (Reportedly, this is the only sensor to be known to work with tthe Elter meters)
 1x Switch light detection sensor from ebay (sends digital high/low signal when light detected above the threshold set by the variable resistor on the module). A0 to Arduino pin 3. VCC to 5v.
-2x 5mm LEDs. Digital pin to annode, 100R resistor on Kathode to ground. Note in my sketch I flash 'two' LEDS (one for import, one for export) but for my hardware I only use one LED on
+1x 5mm LED. Digital pin to annode, 100R resistor on Kathode to ground. Note in my sketch I flash 'two' LEDS (one for import, one for export) but for my hardware I only use one LED on
    the box, and use a 2 way hardware switch to decide which pin to listen to (think of it like a pulse on import/pulse on export switch). 
 1x RTC module ZS-042 DS3231 from ebay, running at 5V, SDA and SCL to dedicated pins on Uno (also works on A4/A5)
 */
